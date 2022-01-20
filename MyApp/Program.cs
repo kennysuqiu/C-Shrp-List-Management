@@ -49,25 +49,15 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                     }
                     else if (input == 2)
                     {
-                        Console.WriteLine("Please indicate the task you want to delete.");
-                        PrintAllTasks(ToDoList);
                         // D - Delete/Remove
-
-                        //Console.WriteLine("Which string should I delete?");
-                        //var index = int.Parse(Console.ReadLine());
-                        //stringList.RemoveAt(index - 1);
-
-                        //try
-                        //{
-                        //    stringList.RemoveAt(index - 1);
-                        //}
-                        //catch
-                        //{
-                        //    Console.WriteLine("There is no string in the list at that index. Please try again");
-                        //    Console.WriteLine("Which string should I delete?");
-                        //    index = int.Parse(Console.ReadLine());
-                        //}
-
+                        int index;
+                        PrintAllTasks(ToDoList);
+                        Console.WriteLine("Please indicate the task you want to delete.");
+                        while (!int.TryParse(Console.ReadLine(), out index) || index > ToDoList.Count) {
+                            Console.WriteLine("Please provide a valid index for the task you want to delete.");
+                        }
+                        ToDoList.RemoveAt(index - 1);
+                        Console.WriteLine("You have successfully deleted the indicated task.");
                     }
                     else if (input == 3)
                     {
