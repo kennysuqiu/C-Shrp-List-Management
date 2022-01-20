@@ -8,24 +8,26 @@
     "net6.0": []
   },
   "packageFolders": {
-    "/Users/kennysu/.nuget/packages/": {}
+    "C:\\Users\\kenny\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kennysu/Projects/MyApp/MyApp/ListManagement.csproj",
+      "projectUniqueName": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\ListManagement.csproj",
       "projectName": "ListManagement",
-      "projectPath": "/Users/kennysu/Projects/MyApp/MyApp/ListManagement.csproj",
-      "packagesPath": "/Users/kennysu/.nuget/packages/",
-      "outputPath": "/Users/kennysu/Projects/MyApp/MyApp/obj/",
+      "projectPath": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\ListManagement.csproj",
+      "packagesPath": "C:\\Users\\kenny\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/kennysu/.config/NuGet/NuGet.Config"
+        "C:\\Users\\kenny\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -58,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200-preview.22055.15\\RuntimeIdentifierGraph.json"
       }
     }
   }

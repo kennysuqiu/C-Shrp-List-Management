@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MRX/dRVLPPs5evZBBaz4KgYrOmsLsTqHTNCbBqMkDtjQkcmbEDnDTVyO+YKC5c4isZN/QEJCtKTmiIAq42wseA==",
+  "dgSpecHash": "pYi3nHebLHKI980V9Chs/hmpxd+BV7JZU/9qbge8I0x3SegCqyP0chQ57B+p4/4uIU1+5eCoYZOsIeFzQ/P1bQ==",
   "success": true,
-  "projectFilePath": "/Users/kennysu/Projects/MyApp/MyApp/ListManagement.csproj",
+  "projectFilePath": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\ListManagement.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

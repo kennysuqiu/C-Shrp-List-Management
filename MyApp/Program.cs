@@ -69,19 +69,21 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         //}
 
                     }
-                    else if (input == 3 )
+                    else if (input == 3)
                     {
                         // U - Update/Edit
                     }
-                    else if (input == 4 )
+                    else if (input == 4)
                     {
-                        string temp;
+                        int temp;
+                        PrintAllTasks(ToDoList);
                         Console.WriteLine("Please give me the index of the task you want to mark as completed.");
-                        for (int index = 0; index < ToDoList.Count(); index++)
-                        {
-                            Console.WriteLine((index+1) + " " + ToDoList[index].ToString());
+                        while (!int.TryParse(Console.ReadLine(), out temp) || temp > ToDoList.Count() || ToDoList[temp-1].IsCompleted == true) {
+                            Console.WriteLine("Please give me an integer index of the task you want to mark as completed.");
                         }
-                        temp = Console.ReadLine();
+                        ToDoList[temp-1].IsCompleted = true;
+                        PrintAllTasks(ToDoList);
+
                     }
                     else if (input == 5)
                     {
@@ -151,16 +153,16 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             }
             else
             {
-                foreach (var toDo in ToDoList)
+                for (int index = 0; index < ToDoList.Count(); index++)
                 {
-                    if (!toDo.IsCompleted)
+                    if (!ToDoList[index].IsCompleted)
                     {
-                        Console.WriteLine(toDo.ToString());
+                        Console.WriteLine((index + 1) + ") " + ToDoList[index].ToString());
                         hasTasksCompletedCount++;
                     }
                 }
             }
-            if (hasTasksCompletedCount == ToDoList.Count())
+            if (hasTasksCompletedCount != ToDoList.Count())
             {
                 Console.WriteLine("You have completed all tasks.");
             }
