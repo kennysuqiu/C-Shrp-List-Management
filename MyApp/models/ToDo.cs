@@ -1,25 +1,8 @@
 ﻿using System;
 namespace ListManagement.models
 {
-	public class ToDo
+	public class ToDo: Item	//ToDo is a child of Item or Item is the Parent of ToDo
 	{
-		private string name;	// <- this is a field
-		// C# - Style of getter and setter
-		public string Name		// <- this is a property
-		{
-			get
-			{
-				return this.name;
-			}
-			set
-			{
-				if (this.name != value)
-                {
-					this.name = value;
-				}
-			}
-		}
-		public string Description { get; set; } // <- this is a property
 		public DateTime Deadline { get; set; }	// <- this is a property
 		public bool IsCompleted { get; set; }   // <- this is a property
 
