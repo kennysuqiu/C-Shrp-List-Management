@@ -53,13 +53,21 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                     else if (input == 2)
                     {
                         int index;
-                        PrintAllTasks(ToDoList);        // Print all of the tasks
-                        Console.WriteLine("Please indicate the task you want to delete.");      // Ask user for the index of the task to be deleted
-                        while (!int.TryParse(Console.ReadLine(), out index) || index > ToDoList.Count) {
-                            Console.WriteLine("Please provide a valid index for the task you want to delete."); // Make sure it's a valid integer
+                        if (!IsEmptyList(ToDoList))
+                        {
+                            PrintAllTasks(ToDoList);        // Print all of the tasks
+                            Console.WriteLine("Please indicate the task you want to delete.");      // Ask user for the index of the task to be deleted
+                            while (!int.TryParse(Console.ReadLine(), out index) || index > ToDoList.Count)
+                            {
+                                Console.WriteLine("Please provide a valid index for the task you want to delete."); // Make sure it's a valid integer
+                            }
+                            ToDoList.RemoveAt(index - 1);   // Delete the task in the list
+                            Console.WriteLine("You have successfully deleted the indicated task.");
+                        } else
+                        {
+                            Console.WriteLine("The list is empty.");
                         }
-                        ToDoList.RemoveAt(index - 1);   // Delete the task in the list
-                        Console.WriteLine("You have successfully deleted the indicated task.");
+                        
                     }
                     // Option #3 - Edit a task
                     else if (input == 3)
@@ -184,9 +192,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                                 Console.WriteLine("Please give me an integer index of the task you want to mark as completed.");
                             }
                             ToDoList[temp-1].IsCompleted = true;
-                        } else
-                        {
-                            Console.WriteLine("You do not have any incomplete tasks.");
                         }
                     }
                     // Option #5 - Display the tasks that are incomplete
@@ -240,7 +245,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
         {
             if (!ToDoList.Any())
             {
-                Console.WriteLine("The list is empty");
+                Console.WriteLine("The list is empty.");
             }
             else
             {
@@ -256,7 +261,8 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             bool hasAllTasksCompleted = true;
             if (!ToDoList.Any())
             {
-                Console.WriteLine("The list is empty");
+                Console.WriteLine("The list is empty.");
+                hasAllTasksCompleted = false;
             }
             else
             {
@@ -271,7 +277,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             }
             if (hasAllTasksCompleted)
             {
-                Console.WriteLine("You have completed all tasks.");
+                Console.WriteLine("You do not have any incomplete tasks.");
             }
         }
 
