@@ -71,6 +71,99 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                     }
                     else if (input == 3)
                     {
+                        int index;
+                        int option;
+                        string redo = "";
+                        do
+                        {
+                            PrintAllTasks(ToDoList);
+                            Console.WriteLine("Which task do you want to edit?");
+                            while (!int.TryParse(Console.ReadLine(), out index) || index > ToDoList.Count())
+                            {
+                                Console.WriteLine("Please give me an integer index of the task you want to edit/update.");
+                            }
+                            Console.WriteLine("What do you want to edit?");
+                            Console.WriteLine("1. Name");
+                            Console.WriteLine("2. Description");
+                            Console.WriteLine("3. Deadline");
+                            Console.WriteLine("4. Complete/Uncomplete");
+                            Console.WriteLine("5. All of them");
+                            while (!int.TryParse(Console.ReadLine(), out option) || option > 5)
+                            {
+                                Console.WriteLine("Please give me a valid option from the menu.");
+                            }
+                            if (option == 1)
+                            {
+                                Console.WriteLine($"The name for task is '{ToDoList[index - 1].Name}.'");
+                                Console.WriteLine("What would you like to change that to?");
+                                ToDoList[index - 1].Name = Console.ReadLine();
+                                Console.WriteLine($"You have successfully updated the name of the task to '{ToDoList[index - 1].Name}.'");
+                            }
+                            else if (option == 2)
+                            {
+                                Console.WriteLine($"The description for task '{ToDoList[index - 1].Name}' is '{ToDoList[index - 1].Description}.'");
+                                Console.WriteLine("What would you like to change the description to?");
+                                ToDoList[index - 1].Description = Console.ReadLine();
+                                Console.WriteLine($"You have successfully updated the description of the task '{ToDoList[index - 1].Name}.'");
+                            }
+                            else if (option == 3)
+                            {
+                                DateTime dateValue;
+                                Console.WriteLine($"The deadline for task '{ToDoList[index - 1].Name}' is '{ToDoList[index - 1].Deadline}.'");
+                                Console.WriteLine("What would you like to change the deadline to?");
+                                while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                                {
+                                    Console.WriteLine($"Please give me a valid deadline for the task '{ToDoList[index - 1].Name}': ");
+                                }
+                                ToDoList[index - 1].Deadline = dateValue;
+                                Console.WriteLine($"You have successfully updated the deadline of the task '{ToDoList[index - 1].Name}.'");
+                            }
+                            else if (option == 4)
+                            {
+                                Console.WriteLine($"The task '{ToDoList[index - 1].Name}' is marked as '{ToDoList[index - 1].IsCompleted}.'");
+                                Console.WriteLine("Would you like to change that? (Y/N)");
+                                if (Console.ReadLine() == "Y")
+                                {
+                                    ToDoList[index - 1].IsCompleted = !ToDoList[index - 1].IsCompleted;
+                                }
+                                else if (Console.ReadLine() == "N")
+                                {
+                                    Console.WriteLine("No, then we will leave it as is.");
+                                }
+                                Console.WriteLine($"You have successfully updated the status of the task '{ToDoList[index - 1].Name}.'");
+                            }
+                            else if (option == 5)
+                            {
+                                Console.WriteLine($"The name for task is '{ToDoList[index - 1].Name}.'");
+                                Console.WriteLine("What would you like to change that to?");
+                                ToDoList[index - 1].Name = Console.ReadLine();
+                                Console.WriteLine($"The description for task '{ToDoList[index - 1].Name}' is '{ToDoList[index - 1].Description}.'");
+                                Console.WriteLine("What would you like to change the description to?");
+                                ToDoList[index - 1].Description = Console.ReadLine();
+                                DateTime dateValue;
+                                Console.WriteLine($"The deadline for task '{ToDoList[index - 1].Name}' is '{ToDoList[index - 1].Deadline}.'");
+                                Console.WriteLine("What would you like to change the deadline to?");
+                                while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                                {
+                                    Console.WriteLine($"Please give me a valid deadline for the task '{ToDoList[index - 1].Name}': ");
+                                }
+                                ToDoList[index - 1].Deadline = dateValue;
+                                Console.WriteLine($"The task '{ToDoList[index - 1].Name}' is marked as '{ToDoList[index - 1].IsCompleted}.'");
+                                Console.WriteLine("Would you like to change that? (Y/N)");
+                                if (Console.ReadLine() == "Y")
+                                {
+                                    ToDoList[index - 1].IsCompleted = !ToDoList[index - 1].IsCompleted;
+                                }
+                                else if (Console.ReadLine() == "N")
+                                {
+                                    Console.WriteLine("No, then we will leave it as is.");
+                                }
+                                Console.WriteLine($"You have successfully updated all of task '{ToDoList[index - 1].Name}' fields");
+                            }
+                            Console.WriteLine("Would you like to edit something else? (Y/N)");
+                            redo = Console.ReadLine();
+                        } while (redo.Equals("Y", StringComparison.InvariantCultureIgnoreCase));
+
                         // U - Update/Edit
                     }
                     else if (input == 4)
@@ -147,6 +240,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
         public static void PrintNonCompletedTasks(List<ToDo> ToDoList)
         {
             int hasTasksCompletedCount = 0;
+            bool firstIndex = false;
             if (!ToDoList.Any())
             {
                 Console.WriteLine("The list is empty");
