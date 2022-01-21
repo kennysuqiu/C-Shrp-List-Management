@@ -19,10 +19,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             {
                 while (input != 7)
                 {
-                    // ToDoList = null;
-                    // ToDoList?.Clear();  // Clears the list and handles error exception
-                    // ToDoList = ToDoList ?? new List<ToDo>();    // Null coalescing operator C#
-
                     nextToDo = new ToDo();
 
                     // Option #1 - Create a task
