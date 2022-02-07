@@ -1,38 +1,36 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net5.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\kenny\\.nuget\\packages\\": {}
+    "/Users/kennysu/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\ListManagement.csproj",
+      "projectUniqueName": "/Users/kennysu/Projects/MyApp/MyApp/ListManagement.csproj",
       "projectName": "ListManagement",
-      "projectPath": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\ListManagement.csproj",
-      "packagesPath": "C:\\Users\\kenny\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\obj\\",
+      "projectPath": "/Users/kennysu/Projects/MyApp/MyApp/ListManagement.csproj",
+      "packagesPath": "/Users/kennysu/.nuget/packages/",
+      "outputPath": "/Users/kennysu/Projects/MyApp/MyApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kenny\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/kennysu/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "projectReferences": {}
         }
       },
@@ -43,8 +41,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net5.0": {
+        "targetAlias": "net5.0",
         "imports": [
           "net461",
           "net462",
@@ -55,12 +53,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-x64",
+            "version": "[5.0.13, 5.0.13]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200-preview.22055.15\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

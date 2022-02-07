@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "pYi3nHebLHKI980V9Chs/hmpxd+BV7JZU/9qbge8I0x3SegCqyP0chQ57B+p4/4uIU1+5eCoYZOsIeFzQ/P1bQ==",
+  "dgSpecHash": "2/ZSf1HpfuGHvedr6FU9q8fmoVk702CB86Daxh1rzHpaV7izhoY/tkYF6+Cvqzax58WF8jIHu6m3IeddoTaYSA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kenny\\source\\repos\\kennysuqiu\\C-Shrp-List-Management2\\MyApp\\ListManagement.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/kennysu/Projects/MyApp/MyApp/ListManagement.csproj",
+  "expectedPackageFiles": [
+    "/Users/kennysu/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "/Users/kennysu/.nuget/packages/microsoft.netcore.app.host.osx-x64/5.0.13/microsoft.netcore.app.host.osx-x64.5.0.13.nupkg.sha512",
+    "/Users/kennysu/.nuget/packages/microsoft.netcore.app.ref/5.0.0/microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

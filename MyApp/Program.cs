@@ -30,6 +30,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         {
                             Console.WriteLine("Give me a name for the task you want to create: ");  // Make sure that name is not empty
                             tempInput = Console.ReadLine();
+                            //Hello
 
                         } while (!tempInput.Any());
                         nextToDo.Name = tempInput;
@@ -179,6 +180,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                             if (!todo.IsCompleted)
                             {
                                 hasNonCompletedTasks = true;
+                                break;
                             }
                         }
                         if (hasNonCompletedTasks)
@@ -223,6 +225,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                 Console.WriteLine("User did not specify a a valid int!");
             }
         }
+
         // Print the main menu
         public static void PrintMenu()
         {
@@ -236,6 +239,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             Console.WriteLine("7. Exit");
             Console.Write("Please choose an option from the menu: ");
         }
+
         // Display all of the tasks
         public static void PrintAllTasks(List<ToDo> ToDoList)
         {
@@ -251,6 +255,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                 }
             }
         }
+
         // Display all of the incomplete task
         public static void PrintNonCompletedTasks(List<ToDo> ToDoList)
         {
@@ -277,6 +282,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             }
         }
 
+        // Returns true/false if the list is empty
         public static bool IsEmptyList(List<ToDo> ToDoList)
         {
             return !ToDoList.Any();
