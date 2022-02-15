@@ -45,6 +45,16 @@ namespace ListManagement
         {
 			items.Remove(i);
         }
+
+		public bool IsEmpty()
+        {
+			return !items.Any();
+        }
+
+		public void GetItem()
+        {
+
+        }
 	}
 }
 

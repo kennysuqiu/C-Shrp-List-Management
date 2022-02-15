@@ -1,18 +1,12 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{523E7411-45CB-43AB-88C4-B1B4912D1C98}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+﻿<Properties StartupConfiguration="{523E7411-45CB-43AB-88C4-B1B4912D1C98}|Default" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.ListManagement PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MyApp/Program.cs">
     <Files>
-      <File FileName="MyApp/Program.cs" Line="21" Column="18" />
+      <File FileName="MyApp/Program.cs" Line="271" Column="10" />
       <File FileName="MyApp/models/ToDo.cs" Line="11" Column="22" />
       <File FileName="MyApp/models/Item.cs" Line="16" Column="1" />
       <File FileName="MyApp/models/Appointment.cs" Line="11" Column="10" />
-      <File FileName="MyApp/ListManagement.csproj" Line="9" Column="19" />
+      <File FileName="MyApp/ItemService.cs" Line="22" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -29,4 +23,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.ListManagement PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
