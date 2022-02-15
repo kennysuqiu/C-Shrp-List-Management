@@ -21,7 +21,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                 while (input != 7)
                 {
                     nextToDo = new ToDo();
-                    //Hello
                     // Option #1 - Create a task
                     if (input == 1)
                     {
