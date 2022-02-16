@@ -1,5 +1,7 @@
 ﻿using System;
+using Library.ListManagement.helpers;
 using ListManagement.models;
+using Newtonsoft.Json;
 
 namespace ListManagement // Note: actual namespace depends on the project name.
 {
@@ -7,7 +9,10 @@ namespace ListManagement // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
+
+            var peristencePath = $"{ Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) }\\SaveData.json";
             var itemService = ItemService.Current;
+            // var listNavigator = new ListNavigator<Item>(itemService.Items);
 
             var nextToDo = new ToDo();
 
@@ -22,7 +27,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                 {
                     nextToDo = new ToDo();
                     // Option #1 - Create a task
-                    // helloooo
                     if (input == 1)
                     {
                         string tempInput = "";
@@ -66,9 +70,12 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                             {
                                 Console.WriteLine("Please provide a valid index for the task you want to delete."); // Make sure it's a valid integer
                             }
-                            var selectedItem = itemService.Items[index - 1];
-                            itemService.Remove(selectedItem);   // Delete the task in the list
-                            Console.WriteLine("You have successfully deleted the indicated task.");
+                            var selectedItem = itemService.Items.FirstOrDefault(i => i.Id == index);
+                            if (selectedItem != null)
+                            {
+                                itemService.Remove(selectedItem);
+                                Console.WriteLine("You have successfully deleted the indicated task."); 
+                            }
                         } else
                         {
                             Console.WriteLine("The list is empty.");
@@ -201,7 +208,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                                 .ForEach(Console.WriteLine);
 
                         }
-
                         Console.WriteLine("Please give me the index of the task you want to mark as completed.");       // Ask the user for the index of the task to be marked as complete
                         while (!int.TryParse(Console.ReadLine(), out temp)) {
                             Console.WriteLine("Please give me an integer index of the task you want to mark as completed.");
@@ -227,18 +233,30 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                     // Option #6 - Display all of the tasks
                     else if (input == 6)
                     {
-                        // R - Read/List all Tasks
-                        if (itemService.IsEmpty())
+                        var userSelection = string.Empty;
+                        while (userSelection != "E")
                         {
-                            Console.WriteLine("The list is empty.");
+                            foreach (var item in itemService.GetPage())
+                            {
+                                Console.WriteLine(item);
+                            }
+                            userSelection = Console.ReadLine();
+                            if (userSelection == "N")
+                            {
+                                itemService.NextPage();
+                            } else if (userSelection == "P")
+                            {
+                                itemService.PreviousPage();
+                            }
                         }
-                        else
-                        {
-                            itemService.Items.ForEach(Console.WriteLine);
-                        }
+                        
+                    }
+                    else if (input == 7)
+                    {
+                        itemService.Save();
                     }
                     // Option #7 - Quit
-                    else if (input == 7)
+                    else if (input == 8)
                     {
                         // Q - Quit
                         System.Environment.Exit(0);
@@ -257,10 +275,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             {
                 Console.WriteLine("User did not specify a a valid int!");
             }
-
-
-
-
         }
 
         // Print the main menu
@@ -273,7 +287,8 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             Console.WriteLine("4. Complete a task");
             Console.WriteLine("5. List all outstanding(not complete) tasks");
             Console.WriteLine("6. List all tasks");
-            Console.WriteLine("7. Exit");
+            Console.WriteLine("7. Save");
+            Console.WriteLine("8. Exit");
             Console.Write("Please choose an option from the menu: ");
         }
 

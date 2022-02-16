@@ -13,3 +13,7 @@ C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\obj\Debug\net6.0\refint\Lis
 C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\obj\Debug\net6.0\ListManagement.pdb
 C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\obj\Debug\net6.0\ListManagement.genruntimeconfig.cache
 C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\obj\Debug\net6.0\ref\ListManagement.dll
+C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\bin\Debug\net6.0\Library.ListManagement.dll
+C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\bin\Debug\net6.0\Library.ListManagement.pdb
+C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\obj\Debug\net6.0\ListManagement.csproj.CopyComplete
+C:\Users\K\Source\Repos\C-Shrp-List-Management\MyApp\bin\Debug\net6.0\Newtonsoft.Json.dll

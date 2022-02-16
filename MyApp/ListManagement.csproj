@@ -11,7 +11,12 @@
   <ItemGroup>
     <None Remove="models\" />
   </ItemGroup>
+
   <ItemGroup>
-    <Folder Include="models\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Library.ListManagement\Library.ListManagement.csproj" />
   </ItemGroup>
 </Project>

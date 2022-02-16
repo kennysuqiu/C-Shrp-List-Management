@@ -1,0 +1,1 @@
+C:\Users\K\Source\Repos\C-Shrp-List-Management\UWPListManagement\UWPListManagement.csproj;x64
