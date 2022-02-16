@@ -13,9 +13,11 @@ namespace ListManagement // Note: actual namespace depends on the project name.
 
             var peristencePath = $"{ Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) }\\SaveData.json";
             var itemService = ItemService.Current;
-            // var listNavigator = new ListNavigator<Item>(itemService.Items);
+/*            var listNavigator = new ListNavigator<Item>(itemService.Items);
+            var listNavigatorFiltered = new ListNavigator<Item>(itemService.FilteredItems);*/
 
             var nextToDo = new ToDo();
+            var nextItem = new Appointment();
 
             Console.WriteLine("Welcome to the List Management App");
             PrintMenu();
@@ -24,9 +26,10 @@ namespace ListManagement // Note: actual namespace depends on the project name.
 
             if (int.TryParse(Console.ReadLine(), out input))
             {
-                while (input != 7)
+                while (input != 9)
                 {
                     nextToDo = new ToDo();
+                    nextItem = new Appointment();
                     // Option #1 - Create a task
                     if (input == 1)
                     {
@@ -36,7 +39,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         {
                             Console.WriteLine("Give me a name for the task you want to create: ");  // Make sure that name is not empty
                             tempInput = Console.ReadLine();
-                            //Hello
 
                         } while (!tempInput.Any());
                         nextToDo.Name = tempInput;
@@ -52,8 +54,48 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         $"Deadline: '{nextToDo.Deadline.Month}/{nextToDo.Deadline.Day}/{nextToDo.Deadline.Year}'");
                         itemService.Add(nextToDo);     // Add the task to the To Do List
                     }
-                    // Option #2 - Delete a task
+                    // Option #2 - Creating an appointment
                     else if (input == 2)
+                    {
+                        string tempInput = "";
+                        DateTime dateValue = DateTime.Today;
+                        do
+                        {
+                            Console.WriteLine("Set a name for the appointment you want to create: ");  // Make sure that name is not empty
+                            tempInput = Console.ReadLine();
+
+                        } while (!tempInput.Any());
+                        (nextItem as Appointment).Name = tempInput;
+                        Console.WriteLine($"Set a description for the appointment '{nextItem.Name}': ");
+                        (nextItem as Appointment).Description = Console.ReadLine()?.Trim();
+                        Console.WriteLine($"Set a start date and time for '{nextItem.Name}': "); // Ask for the deadline
+                        while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                        {
+                            Console.WriteLine($"Please give me a valid deadline for the task '{nextItem.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
+                        }
+                        (nextItem as Appointment).Start = dateValue;
+                        Console.WriteLine($"Set an end date and time for '{nextItem.Name}': "); // Ask for the deadline
+                        while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                        {
+                            Console.WriteLine($"Please give me a valid end date and time for the appointment '{nextItem.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
+                        }
+                        (nextItem as Appointment).End = dateValue;
+                        Console.WriteLine("Who is attending the appointment? (E for Exit)");  // Make sure that name is not empty
+                        do
+                        {
+                            tempInput = Console.ReadLine();
+                            if (tempInput == "E")
+                            {
+                                break;
+                            }
+                            nextItem.Attendees.Add(tempInput);
+
+                        } while (tempInput != "E");
+                        Console.WriteLine($"Appointment successfully added. Name: '{nextItem.Name}' | Description: '{nextItem.Description}'");
+                        itemService.Add(nextItem as Appointment);   
+                    }
+                    // Option #3 - Delete a task
+                    else if (input == 3)
                     {
                         int index;
 
@@ -79,7 +121,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         
                     }
                     // Option #3 - Edit a task
-                    else if (input == 3)
+                    else if (input == 4)
                     {
                         int index;
                         int option;
@@ -189,7 +231,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         }
                     }
                     // Option #4 - Mark task as complete
-                    else if (input == 4)
+                    else if (input == 5)
                     {
                         int temp;
                         if (itemService.Items.Any())
@@ -211,8 +253,9 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         (itemService.Items[temp - 1] as ToDo).IsCompleted = true;
                     }
                     // Option #5 - Display the tasks that are incomplete
-                    else if (input == 5)
+                    else if (input == 6)
                     {
+                        itemService.ShowComplete = false;
                         var userSelection = string.Empty;
                         while (userSelection != "E")
                         {
@@ -230,9 +273,10 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                             }
                         }
                     }
-                    // Option #6 - Display all of the tasks
-                    else if (input == 6)
+                    // Option #7 - Display all of the tasks
+                    else if (input == 7)
                     {
+                        itemService.ShowComplete = true;
                         var userSelection = string.Empty;
                         while (userSelection != "E")
                         {
@@ -251,12 +295,12 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         }
                         
                     }
-                    else if (input == 7)
+                    else if (input == 8)
                     {
                         itemService.Save();
                     }
                     // Option #7 - Quit
-                    else if (input == 8)
+                    else if (input == 9)
                     {
                         // Q - Quit
                         System.Environment.Exit(0);
@@ -282,13 +326,14 @@ namespace ListManagement // Note: actual namespace depends on the project name.
         {
             Console.WriteLine("Task Management Menu");
             Console.WriteLine("1. Create a new task");
-            Console.WriteLine("2. Delete an existing task");
-            Console.WriteLine("3. Edit an existing task");
-            Console.WriteLine("4. Complete a task");
-            Console.WriteLine("5. List all outstanding(not complete) tasks");
-            Console.WriteLine("6. List all tasks");
-            Console.WriteLine("7. Save");
-            Console.WriteLine("8. Exit");
+            Console.WriteLine("2. Create a new appointment");
+            Console.WriteLine("3. Delete an existing task");
+            Console.WriteLine("4. Edit an existing task");
+            Console.WriteLine("5. Complete a task");
+            Console.WriteLine("6. List all outstanding (not complete) tasks");
+            Console.WriteLine("7. List all tasks");
+            Console.WriteLine("8. Save");
+            Console.WriteLine("9. Exit");
             Console.Write("Please choose an option from the menu: ");
         }
     }

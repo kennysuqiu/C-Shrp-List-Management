@@ -10,12 +10,18 @@ namespace ListManagement.models
 		public Appointment()
         {
 			Attendees = new List<string>();	// Initialize the list to a blank list, prevents it from being null
+
         }
 
 
 		public override string ToString()
 		{
-			return $"Task Name: {Name} | Completed: {Description} | From: {Start} | To: {End}";
+			string listAttendees = "";
+			foreach (var val in Attendees)
+            {
+				listAttendees += val.ToString() + " ";
+            }
+			return $"{Id} Appointment: {Name} | Description: {Description} | From: {Start} | To: {End} | Attendees: {listAttendees}";
 		}
 	}
 }

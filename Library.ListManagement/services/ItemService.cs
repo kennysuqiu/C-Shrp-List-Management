@@ -35,6 +35,11 @@ namespace Library.ListManagement.services
                 var incompleteItems = Items.Where(i =>
                 (!ShowComplete && !((i as ToDo)?.IsCompleted ?? true)) //incomplete only
                 || ShowComplete);
+                /*                var searchResults = incompleteItems.Where(i => string.IsNullOrWhiteSpace(Query)
+                                || (i?.Name?.ToUpper().Contains(Query) ?? false)
+                                || (i?.Description.ToUpper()?.Contains(Query) ?? false)
+                                || (i as Appointment)?.Attendees.Select(t => t.ToUpper())?.Contains(Query) ?? false));*/
+                
                 return incompleteItems;
             }
         }
