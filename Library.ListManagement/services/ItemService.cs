@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ListManagement.services
+namespace Library.ListManagement.services
 {
     public class ItemService
     {
@@ -32,9 +32,10 @@ namespace ListManagement.services
         {
             get
             {
-                return Items.Where(i =>
+                var incompleteItems = Items.Where(i =>
                 (!ShowComplete && !((i as ToDo)?.IsCompleted ?? true)) //incomplete only
                 || ShowComplete);
+                return incompleteItems;
             }
         }
 
@@ -72,16 +73,17 @@ namespace ListManagement.services
                 }
             }
 
-            listNav = new ListNavigator<Item>(FilteredItems.ToList(), 2);
+            listNav = new ListNavigator<Item>(FilteredItems, 5);
         }
 
         public void Add(Item i)
         {
+            items.Add(i);
             if (i.Id <= 0)
             {
                 i.Id = nextId;
             }
-            items.Add(i);
+            
         }
 
         public void Remove(Item i)

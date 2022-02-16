@@ -1,4 +1,5 @@
 ﻿using System;
+using Library.ListManagement.services;
 using Library.ListManagement.helpers;
 using ListManagement.models;
 using Newtonsoft.Json;
@@ -55,30 +56,25 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                     else if (input == 2)
                     {
                         int index;
-                        if (itemService.IsEmpty())
-                        {
-                            if (itemService.IsEmpty())
-                            {
-                                Console.WriteLine("The list is empty.");
-                            }
-                            else
-                            {
-                                itemService.Items.ForEach(Console.WriteLine);
-                            }
-                            Console.WriteLine("Please indicate the task you want to delete.");      // Ask user for the index of the task to be deleted
-                            while (!int.TryParse(Console.ReadLine(), out index))
-                            {
-                                Console.WriteLine("Please provide a valid index for the task you want to delete."); // Make sure it's a valid integer
-                            }
-                            var selectedItem = itemService.Items.FirstOrDefault(i => i.Id == index);
-                            if (selectedItem != null)
-                            {
-                                itemService.Remove(selectedItem);
-                                Console.WriteLine("You have successfully deleted the indicated task."); 
-                            }
-                        } else
+
+                        if (!itemService.Items.Any())
                         {
                             Console.WriteLine("The list is empty.");
+                            continue;
+                        }
+
+                        itemService.Items.ForEach(Console.WriteLine);
+
+                        Console.WriteLine("Please indicate the task you want to delete.");      // Ask user for the index of the task to be deleted
+                        while (!int.TryParse(Console.ReadLine(), out index))
+                        {
+                            Console.WriteLine("Please provide a valid index for the task you want to delete."); // Make sure it's a valid integer
+                        }
+                        var selectedItem = itemService.Items.FirstOrDefault(i => i.Id == index);
+                        if (selectedItem != null)
+                        {
+                            itemService.Remove(selectedItem);
+                            Console.WriteLine("You have successfully deleted the indicated task."); 
                         }
                         
                     }
@@ -88,11 +84,11 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         int index;
                         int option;
                         string redo = "";
-                        if (!itemService.IsEmpty())
+                        if (itemService.Items.Any())
                         {
                             do
                             {
-                                if (itemService.IsEmpty())
+                                if (itemService.Items.Any())
                                 {
                                     Console.WriteLine("The list is empty.");
                                 }
@@ -196,7 +192,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                     else if (input == 4)
                     {
                         int temp;
-                        if (itemService.IsEmpty())
+                        if (itemService.Items.Any())
                         {
                             Console.WriteLine("The list is empty.");
                         }
@@ -217,17 +213,21 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                     // Option #5 - Display the tasks that are incomplete
                     else if (input == 5)
                     {
-                        // R - Read/List Uncompleted Tasks
-                        if (itemService.IsEmpty())
+                        var userSelection = string.Empty;
+                        while (userSelection != "E")
                         {
-                            Console.WriteLine("The list is empty.");
-                        }
-                        else
-                        {
-                            itemService.Items
-                                .Where(i => !((i as ToDo)?.IsCompleted ?? true))
-                                .ToList()
-                                .ForEach(Console.WriteLine);
+                            foreach (var item in itemService.GetPage())
+                            {
+                                Console.WriteLine(item);  
+                            }
+                            userSelection = Console.ReadLine();
+                            if (userSelection == "N")
+                            {
+                                itemService.NextPage();
+                            } else if (userSelection == "P")
+                            {
+                                itemService.PreviousPage();
+                            }
                         }
                     }
                     // Option #6 - Display all of the tasks
@@ -238,7 +238,7 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                         {
                             foreach (var item in itemService.GetPage())
                             {
-                                Console.WriteLine(item);
+                                Console.WriteLine(item);  
                             }
                             userSelection = Console.ReadLine();
                             if (userSelection == "N")
@@ -290,12 +290,6 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             Console.WriteLine("7. Save");
             Console.WriteLine("8. Exit");
             Console.Write("Please choose an option from the menu: ");
-        }
-
-        // Returns true/false if the list is empty
-        public static bool IsEmptyList(List<ToDo> ToDoList)
-        {
-            return !ToDoList.Any();
         }
     }
 }

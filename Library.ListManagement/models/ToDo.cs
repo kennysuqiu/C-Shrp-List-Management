@@ -8,7 +8,7 @@ namespace ListManagement.models
 
         public override string ToString()
         {
-            return $"Task Name: {Name} | Description: {Description} | Completed: {IsCompleted} | Deadline: {Deadline.Month}/{Deadline.Day}/{Deadline.Year}";
+            return $"{Id} Task Name: {Name} | Description: {Description} | Completed: {IsCompleted} | Deadline: {Deadline.Month}/{Deadline.Day}/{Deadline.Year}";
         }
 
     }
