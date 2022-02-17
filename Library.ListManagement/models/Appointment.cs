@@ -21,7 +21,7 @@ namespace ListManagement.models
             {
 				listAttendees += val.ToString() + " ";
             }
-			return $"{Id} Appointment: {Name} | Description: {Description} | From: {Start} | To: {End} | Attendees: {listAttendees}";
+			return $"Appointment: {Name} | Description: {Description} | From: {Start} | To: {End} | Attendees: {listAttendees}";
 		}
 	}
 }

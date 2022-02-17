@@ -13,13 +13,16 @@ namespace Library.ListManagement.services
     {
         private List<Item> items;
         private ListNavigator<Item> listNav;
-        private string persistencePath;
         private JsonSerializerSettings serializerSettings
             = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         static private ItemService instance;
 
+        static private string peristencePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        static private string filePath = Path.Combine(peristencePath, "taskData.json");
+
         public bool ShowComplete { get; set; }
+        public string Query { get; set; }
         public List<Item> Items
         {
             get
@@ -35,12 +38,11 @@ namespace Library.ListManagement.services
                 var incompleteItems = Items.Where(i =>
                 (!ShowComplete && !((i as ToDo)?.IsCompleted ?? true)) //incomplete only
                 || ShowComplete);
-                /*                var searchResults = incompleteItems.Where(i => string.IsNullOrWhiteSpace(Query)
-                                || (i?.Name?.ToUpper().Contains(Query) ?? false)
-                                || (i?.Description.ToUpper()?.Contains(Query) ?? false)
-                                || (i as Appointment)?.Attendees.Select(t => t.ToUpper())?.Contains(Query) ?? false));*/
-                
-                return incompleteItems;
+                var searchResults = incompleteItems.Where(i => string.IsNullOrWhiteSpace(Query)
+                || (i?.Name?.ToUpper().Contains(Query) ?? false)
+                || (i?.Description?.ToUpper()?.Contains(Query) ?? false)
+                || ((i as Appointment)?.Attendees?.Select(t => t.ToUpper())?.Contains(Query) ?? false));
+                return searchResults;
             }
         }
 
@@ -60,20 +62,19 @@ namespace Library.ListManagement.services
         {
             items = new List<Item>();
 
-            persistencePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            if (File.Exists(persistencePath))
+            if (File.Exists(filePath))
             {
                 try
                 {
-                    var state = File.ReadAllText(persistencePath);
-                    if (state != null)
+                    var state = File.ReadAllText(filePath);
+                    if (state.Length > 0)
                     {
                         items = JsonConvert.DeserializeObject<List<Item>>(state, serializerSettings) ?? new List<Item>();
                     }
                 }
                 catch (Exception e)
                 {
-                    File.Delete(persistencePath);
+                    File.Delete(filePath);
                     items = new List<Item>();
                 }
             }
@@ -100,11 +101,11 @@ namespace Library.ListManagement.services
         {
 
             var listJson = JsonConvert.SerializeObject(Items, serializerSettings);
-            if (File.Exists(persistencePath))
+            if (File.Exists(filePath))
             {
-                File.Delete(persistencePath);
+                File.Delete(filePath);
             }
-            File.WriteAllText(persistencePath, listJson);
+            File.WriteAllText(filePath, listJson);
         }
 
         public Dictionary<object, Item> GetPage()

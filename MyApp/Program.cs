@@ -10,77 +10,157 @@ namespace ListManagement // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-
-            var peristencePath = $"{ Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) }\\SaveData.json";
             var itemService = ItemService.Current;
-/*            var listNavigator = new ListNavigator<Item>(itemService.Items);
-            var listNavigatorFiltered = new ListNavigator<Item>(itemService.FilteredItems);*/
-
-            var nextToDo = new ToDo();
-            var nextItem = new Appointment();
 
             Console.WriteLine("Welcome to the List Management App");
-            PrintMenu();
 
             int input = -1;
 
-            if (int.TryParse(Console.ReadLine(), out input))
+            while (input != 9)
             {
-                while (input != 9)
+                PrintMenu();
+                if (!int.TryParse(Console.ReadLine(), out input))
                 {
-                    nextToDo = new ToDo();
-                    nextItem = new Appointment();
-                    // Option #1 - Create a task
-                    if (input == 1)
+                    Console.WriteLine("User entered an invalid input. Please try again.");
+                    continue;
+                }
+                // Option #1 - Create a task
+                if (input == 1)
+                {
+                    var nextToDo = new ToDo();
+                    string tempInput = "";
+                    DateTime dateValue = DateTime.Today;
+                    do
                     {
-                        string tempInput = "";
-                        DateTime dateValue = DateTime.Today;
-                        do
-                        {
-                            Console.WriteLine("Give me a name for the task you want to create: ");  // Make sure that name is not empty
-                            tempInput = Console.ReadLine();
+                        Console.WriteLine("Give me a name for the task you want to create: ");  // Make sure that name is not empty
+                        tempInput = Console.ReadLine();
 
-                        } while (!tempInput.Any());
-                        nextToDo.Name = tempInput;
-                        Console.WriteLine($"Give me a description for the task '{nextToDo.Name}': ");
-                        nextToDo.Description = Console.ReadLine()?.Trim();                                      
-                        Console.WriteLine($"Give me a deadline in the format (MM/DD/YY) for the task '{nextToDo.Name}': "); // Ask for the deadline
-                        while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
-                        {
-                            Console.WriteLine($"Please give me a valid deadline for the task '{nextToDo.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
-                        }
-                        nextToDo.Deadline = dateValue;
-                        Console.WriteLine($"Task successfully added. Name: '{nextToDo.Name}' | Description: '{nextToDo.Description}' | " +
-                        $"Deadline: '{nextToDo.Deadline.Month}/{nextToDo.Deadline.Day}/{nextToDo.Deadline.Year}'");
-                        itemService.Add(nextToDo);     // Add the task to the To Do List
+                    } while (!tempInput.Any());
+                    nextToDo.Name = tempInput;
+                    Console.WriteLine($"Give me a description for the task '{nextToDo.Name}': ");
+                    nextToDo.Description = Console.ReadLine()?.Trim();
+                    Console.WriteLine($"Give me a deadline in the format (MM/DD/YY) for the task '{nextToDo.Name}': "); // Ask for the deadline
+                    while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                    {
+                        Console.WriteLine($"Please give me a valid deadline for the task '{nextToDo.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
                     }
-                    // Option #2 - Creating an appointment
-                    else if (input == 2)
-                    {
-                        string tempInput = "";
-                        DateTime dateValue = DateTime.Today;
-                        do
-                        {
-                            Console.WriteLine("Set a name for the appointment you want to create: ");  // Make sure that name is not empty
-                            tempInput = Console.ReadLine();
+                    nextToDo.Deadline = dateValue;
+                    Console.WriteLine($"Task successfully added. Name: '{nextToDo.Name}' | Description: '{nextToDo.Description}' | " +
+                    $"Deadline: '{nextToDo.Deadline.Month}/{nextToDo.Deadline.Day}/{nextToDo.Deadline.Year}'");
+                    itemService.Add(nextToDo);     // Add the task to the To Do List
+                    itemService.Save();
 
-                        } while (!tempInput.Any());
-                        (nextItem as Appointment).Name = tempInput;
-                        Console.WriteLine($"Set a description for the appointment '{nextItem.Name}': ");
-                        (nextItem as Appointment).Description = Console.ReadLine()?.Trim();
-                        Console.WriteLine($"Set a start date and time for '{nextItem.Name}': "); // Ask for the deadline
+                }
+                // Option #2 - Creating an appointment
+                else if (input == 2)
+                {
+                    var nextAppointment = new Appointment();
+                    string tempInput = "";
+                    DateTime dateValue = DateTime.Today;
+                    do
+                    {
+                        Console.WriteLine("Set a name for the appointment you want to create: ");  // Make sure that name is not empty
+                        tempInput = Console.ReadLine();
+
+                    } while (!tempInput.Any());
+                    (nextAppointment as Appointment).Name = tempInput;
+                    Console.WriteLine($"Set a description for the appointment '{nextAppointment.Name}': ");
+                    (nextAppointment as Appointment).Description = Console.ReadLine()?.Trim();
+                    Console.WriteLine($"Set a start date and time for '{nextAppointment.Name}': "); // Ask for the deadline
+                    while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                    {
+                        Console.WriteLine($"Please give me a valid deadline for the task '{nextAppointment.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
+                    }
+                    (nextAppointment as Appointment).Start = dateValue;
+                    Console.WriteLine($"Set an end date and time for '{nextAppointment.Name}': "); // Ask for the deadline
+                    while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                    {
+                        Console.WriteLine($"Please give me a valid end date and time for the appointment '{nextAppointment.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
+                    }
+                    (nextAppointment as Appointment).End = dateValue;
+                    Console.WriteLine("Who is attending the appointment? (E for Exit)");  // Make sure that name is not empty
+                    do
+                    {
+                        tempInput = Console.ReadLine();
+                        if (tempInput == "E")
+                        {
+                            break;
+                        }
+                        nextAppointment.Attendees.Add(tempInput);
+
+                    } while (tempInput != "E");
+                    Console.WriteLine($"Appointment successfully added. Name: '{nextAppointment.Name}' | Description: '{nextAppointment.Description}'");
+                    itemService.Add(nextAppointment as Appointment);
+                    itemService.Save();
+
+                }
+                // Option #3 - Delete a task
+                else if (input == 3)
+                {
+                    int index;
+
+                    if (!itemService.Items.Any())
+                    {
+                        Console.WriteLine("The list is empty.");
+                        continue;
+                    }
+
+                    itemService.Items.ForEach(Console.WriteLine);
+
+                    Console.WriteLine("Please indicate the task you want to delete.");      // Ask user for the index of the task to be deleted
+                    while (!int.TryParse(Console.ReadLine(), out index))
+                    {
+                        Console.WriteLine("Please provide a valid index for the task you want to delete."); // Make sure it's a valid integer
+                    }
+                    var selectedItem = itemService.Items.FirstOrDefault(i => i.Id == index);
+                    if (selectedItem != default(Item))
+                    {
+                        itemService.Remove(selectedItem);
+                        Console.WriteLine("You have successfully deleted the indicated task.");
+                    }
+                    itemService.Save();
+
+                }
+                // Option #3 - Edit a task
+                else if (input == 4)
+                {
+                    int index = 0;
+                    string tempInput;
+                    if (itemService.Items.Any())
+                    {
+                        Console.WriteLine("The list is empty.");
+                    }
+                    else
+                    {
+                        itemService.Items.ForEach(Console.WriteLine);
+                    }
+                    Console.WriteLine("Which task do you want to edit?");   // Ask for the index of the task to be edited
+                    while (!int.TryParse(Console.ReadLine(), out index))
+                    {
+                        Console.WriteLine("Please give me an integer index of the task you want to edit/update.");
+                    }
+                    var editingItem = itemService.Items[index-1];
+                    DateTime dateValue;
+                    if (editingItem is Appointment apt)
+                    {
+                        Console.WriteLine("Set the new name:");
+                        apt.Name = Console.ReadLine();
+                        Console.WriteLine("Set the new description:");
+                        apt.Description = Console.ReadLine();
+                        Console.WriteLine("Set the new start date:");
                         while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
                         {
-                            Console.WriteLine($"Please give me a valid deadline for the task '{nextItem.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
+                            Console.WriteLine($"Please give me a valid end date and time for the appointment: "); // Make sure that the deadline is valid and can be parsed as DateTime
                         }
-                        (nextItem as Appointment).Start = dateValue;
-                        Console.WriteLine($"Set an end date and time for '{nextItem.Name}': "); // Ask for the deadline
+                        apt.Start = dateValue;
+                        Console.WriteLine("Set the new end date:");
                         while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
                         {
-                            Console.WriteLine($"Please give me a valid end date and time for the appointment '{nextItem.Name}': "); // Make sure that the deadline is valid and can be parsed as DateTime
+                            Console.WriteLine($"Please give me a valid end date and time for the appointment: "); // Make sure that the deadline is valid and can be parsed as DateTime
                         }
-                        (nextItem as Appointment).End = dateValue;
-                        Console.WriteLine("Who is attending the appointment? (E for Exit)");  // Make sure that name is not empty
+                        apt.End = dateValue;
+                        Console.WriteLine("Set the new attendees");
+                        apt.Attendees.Clear();
                         do
                         {
                             tempInput = Console.ReadLine();
@@ -88,237 +168,169 @@ namespace ListManagement // Note: actual namespace depends on the project name.
                             {
                                 break;
                             }
-                            nextItem.Attendees.Add(tempInput);
-
+                            apt.Attendees.Add(tempInput);
                         } while (tempInput != "E");
-                        Console.WriteLine($"Appointment successfully added. Name: '{nextItem.Name}' | Description: '{nextItem.Description}'");
-                        itemService.Add(nextItem as Appointment);   
-                    }
-                    // Option #3 - Delete a task
-                    else if (input == 3)
+                        Console.WriteLine($"Appointment {apt.Name} has been updated");
+                    } else if (editingItem is ToDo task)
                     {
-                        int index;
+                        Console.WriteLine("Set the new task name:");
+                        task.Name = Console.ReadLine();
+                        Console.WriteLine("Set the new description:");
+                        task.Description = Console.ReadLine();
+                        Console.WriteLine("Set the new deadline:");
+                        while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
+                        {
+                            Console.WriteLine($"Please give me a valid end date and time for the appointment: "); // Make sure that the deadline is valid and can be parsed as DateTime
+                        }
+                        task.Deadline = dateValue;
+                        Console.WriteLine("Set complete or incomplete (C/I)");
+                        do
+                        {
+                            Console.WriteLine("Input C for Complete or I for Incomplete");  // Make sure that name is not empty
+                            tempInput = Console.ReadLine();
 
-                        if (!itemService.Items.Any())
+                        } while (tempInput != "C" || tempInput != "I");
+                        if (tempInput == "C")
                         {
-                            Console.WriteLine("The list is empty.");
-                            continue;
-                        }
-
-                        itemService.Items.ForEach(Console.WriteLine);
-
-                        Console.WriteLine("Please indicate the task you want to delete.");      // Ask user for the index of the task to be deleted
-                        while (!int.TryParse(Console.ReadLine(), out index))
+                            task.IsCompleted = true;
+                        } else if (tempInput == "I")
                         {
-                            Console.WriteLine("Please provide a valid index for the task you want to delete."); // Make sure it's a valid integer
+                            task.IsCompleted = false;
                         }
-                        var selectedItem = itemService.Items.FirstOrDefault(i => i.Id == index);
-                        if (selectedItem != null)
-                        {
-                            itemService.Remove(selectedItem);
-                            Console.WriteLine("You have successfully deleted the indicated task."); 
-                        }
-                        
+                        Console.WriteLine("Task successfully updated");
                     }
-                    // Option #3 - Edit a task
-                    else if (input == 4)
+                }
+                // Option #4 - Mark task as complete
+                else if (input == 5)
+                {
+                    int temp;
+                    if (!itemService.FilteredItems.Any())
                     {
-                        int index;
-                        int option;
-                        string redo = "";
-                        if (itemService.Items.Any())
-                        {
-                            do
-                            {
-                                if (itemService.Items.Any())
-                                {
-                                    Console.WriteLine("The list is empty.");
-                                }
-                                else
-                                {
-                                    itemService.Items.ForEach(Console.WriteLine);
-                                }
-                                Console.WriteLine("Which task do you want to edit?");   // Ask for the index of the task to be edited
-                                while (!int.TryParse(Console.ReadLine(), out index))
-                                {
-                                    Console.WriteLine("Please give me an integer index of the task you want to edit/update.");
-                                }
-                                // Print out options on what user wants to edit (name, description, deadline, complete/incomplete, or all)
-                                Console.WriteLine("What do you want to edit?");
-                                Console.WriteLine("1. Name");
-                                Console.WriteLine("2. Description");
-                                Console.WriteLine("3. Deadline");
-                                Console.WriteLine("4. Complete/Incomplete");
-                                Console.WriteLine("5. All of the above");
-                                while (!int.TryParse(Console.ReadLine(), out option) || option > 5)
-                                {
-                                    Console.WriteLine("Please give me a valid option from the menu.");  // Obtain a valid integer index
-                                }
-                                if (option == 1)    // Choice #1 - Edit/Update Name only
-                                {
-                                    Console.WriteLine($"The name for task is '{itemService.Items[index - 1].Name}.'");
-                                    Console.WriteLine("What would you like to change that to?");
-                                    itemService.Items[index - 1].Name = Console.ReadLine();
-                                    Console.WriteLine($"You have successfully updated the name of the task to '{itemService.Items[index - 1].Name}.'");
-                                }
-                                else if (option == 2)   // Choice #2 - Edit/Update Description only
-                                {
-                                    Console.WriteLine($"The description for task '{itemService.Items[index - 1].Name}' is '{itemService.Items[index - 1].Description}.'");
-                                    Console.WriteLine("What would you like to change the description to?");
-                                    itemService.Items[index - 1].Description = Console.ReadLine();
-                                    Console.WriteLine($"You have successfully updated the description of the task '{itemService.Items[index - 1].Name}.'");
-                                }
-                                else if (option == 3)   // Choice #3 - Edit/Update deadline only
-                                {
-                                    DateTime dateValue;
-                                    Console.WriteLine($"The deadline for task '{itemService.Items[index - 1].Name}' is '{(itemService.Items[index - 1] as ToDo).Deadline}.'");
-                                    Console.WriteLine("What would you like to change the deadline to?");
-                                    while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
-                                    {
-                                        Console.WriteLine($"Please give me a valid deadline for the task '{itemService.Items[index - 1].Name}': ");
-                                    }
-                                    (itemService.Items[index - 1] as ToDo).Deadline = dateValue;
-                                    Console.WriteLine($"You have successfully updated the deadline of the task '{itemService.Items[index - 1].Name}.'");
-                                }
-                                else if (option == 4)   // Choice #4 - Edit/Update the status of the task (complete/incomplete)
-                                {
-                                    Console.WriteLine($"The task '{itemService.Items[index - 1].Name}' is marked as '{(itemService.Items[index - 1] as ToDo).IsCompleted}.'");
-                                    Console.WriteLine("Would you like to change that? (Y/N)");
-                                    if (Console.ReadLine() == "Y")
-                                    {
-                                        (itemService.Items[index - 1] as ToDo).IsCompleted = !(itemService.Items[index - 1] as ToDo).IsCompleted;
-                                    }
-                                    else if (Console.ReadLine() == "N")
-                                    {
-                                        Console.WriteLine("No, then we will leave it as is.");
-                                    }
-                                    Console.WriteLine($"You have successfully updated the status of the task '{itemService.Items[index - 1].Name}.'");
-                                }
-                                else if (option == 5)   // Choice #5 - Edit/Update all of the items above
-                                {
-                                    Console.WriteLine($"The name for task is '{itemService.Items[index - 1].Name}.'");
-                                    Console.WriteLine("What would you like to change that to?");
-                                    itemService.Items[index - 1].Name = Console.ReadLine();
-                                    Console.WriteLine($"The description for task '{itemService.Items[index - 1].Name}' is '{itemService.Items[index - 1].Description}.'");
-                                    Console.WriteLine("What would you like to change the description to?");
-                                    itemService.Items[index - 1].Description = Console.ReadLine();
-                                    DateTime dateValue;
-                                    Console.WriteLine($"The deadline for task '{itemService.Items[index - 1].Name}' is '{(itemService.Items[index - 1] as ToDo).Deadline}.'");
-                                    Console.WriteLine("What would you like to change the deadline to?");
-                                    while (!DateTime.TryParse(Console.ReadLine(), out dateValue))
-                                    {
-                                        Console.WriteLine($"Please give me a valid deadline for the task '{itemService.Items[index - 1].Name}': ");
-                                    }
-                                    (itemService.Items[index - 1] as ToDo).Deadline = dateValue;
-                                    Console.WriteLine($"The task '{itemService.Items[index - 1].Name}' is marked as '{(itemService.Items[index - 1] as ToDo).IsCompleted}.'");
-                                    Console.WriteLine("Would you like to change that? (Y/N)");
-                                    if (Console.ReadLine() == "Y")
-                                    {
-                                        (itemService.Items[index - 1] as ToDo).IsCompleted = !((itemService.Items[index - 1] as ToDo).IsCompleted);
-                                    }
-                                    else if (Console.ReadLine() == "N")
-                                    {
-                                        Console.WriteLine("No, then we will leave it as is.");
-                                    }
-                                    Console.WriteLine($"You have successfully updated all of task '{itemService.Items[index - 1].Name}' fields");
-                                }
-                                Console.WriteLine("Would you like to edit something else? (Y/N)");
-                                redo = Console.ReadLine();
-                            } while (redo.Equals("Y", StringComparison.InvariantCultureIgnoreCase));
-                        } else
-                        {
-                            Console.WriteLine("The list is empty.");
-                        }
-                    }
-                    // Option #4 - Mark task as complete
-                    else if (input == 5)
-                    {
-                        int temp;
-                        if (itemService.Items.Any())
-                        {
-                            Console.WriteLine("The list is empty.");
-                        }
-                        else
-                        {
-                            itemService.Items
-                                .Where(i => !((i as ToDo)?.IsCompleted ?? true))
-                                .ToList()
-                                .ForEach(Console.WriteLine);
-
-                        }
-                        Console.WriteLine("Please give me the index of the task you want to mark as completed.");       // Ask the user for the index of the task to be marked as complete
-                        while (!int.TryParse(Console.ReadLine(), out temp)) {
-                            Console.WriteLine("Please give me an integer index of the task you want to mark as completed.");
-                        }
-                        (itemService.Items[temp - 1] as ToDo).IsCompleted = true;
-                    }
-                    // Option #5 - Display the tasks that are incomplete
-                    else if (input == 6)
-                    {
-                        itemService.ShowComplete = false;
-                        var userSelection = string.Empty;
-                        while (userSelection != "E")
-                        {
-                            foreach (var item in itemService.GetPage())
-                            {
-                                Console.WriteLine(item);  
-                            }
-                            userSelection = Console.ReadLine();
-                            if (userSelection == "N")
-                            {
-                                itemService.NextPage();
-                            } else if (userSelection == "P")
-                            {
-                                itemService.PreviousPage();
-                            }
-                        }
-                    }
-                    // Option #7 - Display all of the tasks
-                    else if (input == 7)
-                    {
-                        itemService.ShowComplete = true;
-                        var userSelection = string.Empty;
-                        while (userSelection != "E")
-                        {
-                            foreach (var item in itemService.GetPage())
-                            {
-                                Console.WriteLine(item);  
-                            }
-                            userSelection = Console.ReadLine();
-                            if (userSelection == "N")
-                            {
-                                itemService.NextPage();
-                            } else if (userSelection == "P")
-                            {
-                                itemService.PreviousPage();
-                            }
-                        }
-                        
-                    }
-                    else if (input == 8)
-                    {
-                        itemService.Save();
-                    }
-                    // Option #7 - Quit
-                    else if (input == 9)
-                    {
-                        // Q - Quit
-                        System.Environment.Exit(0);
+                        Console.WriteLine("The list is empty.");
                     }
                     else
                     {
-                        Console.WriteLine("User did not enter a a valid int!");
+                        itemService.Items
+                            .Where(i => !((i as ToDo)?.IsCompleted ?? true))
+                            .ToList()
+                            .ForEach(Console.WriteLine);
 
                     }
-                    PrintMenu();
-                    input = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Please give me the index of the task you want to mark as completed.");       // Ask the user for the index of the task to be marked as complete
+                    while (!int.TryParse(Console.ReadLine(), out temp))
+                    {
+                        Console.WriteLine("Please give me an integer index of the task you want to mark as completed.");
+                    }
+                    (itemService.Items[temp - 1] as ToDo).IsCompleted = true;
+                    itemService.Save();
+                }
+                // Option #6 - Display the tasks that are incomplete
+                else if (input == 6)
+                {
+                    itemService.ShowComplete = false;
+                    var userSelection = string.Empty;
+                    if (itemService.FilteredItems.Count() <= 0)
+                    {
+                        Console.WriteLine("Your list empty.");
+                        continue;
+                    }
+                    while (userSelection != "E")
+                    {
+                        foreach (var item in itemService.GetPage())
+                        {
+                            Console.WriteLine(item);
+                        }
+                        userSelection = Console.ReadLine();
+                        if (userSelection == "N")
+                        {
+                            itemService.NextPage();
+                        }
+                        else if (userSelection == "P")
+                        {
+                            itemService.PreviousPage();
+                        }
+                    }
+                }
+                // Option #7 - Display all of the tasks
+                else if (input == 7)
+                {
+                    itemService.ShowComplete = true;
+                    var userSelection = string.Empty;
+/*                    if (itemService.Items.Count <= 0)
+                    {
+                        Console.WriteLine("Your list empty.");
+                        continue;
+                    }*/
+                    while (userSelection != "E")
+                    {
+                        foreach (var item in itemService.GetPage())
+                        {
+                            Console.WriteLine(item);
+                        }
+                        userSelection = Console.ReadLine();
+                        if (userSelection == "N")
+                        {
+                            itemService.NextPage();
+                        }
+                        else if (userSelection == "P")
+                        {
+                            itemService.PreviousPage();
+                        }
+                    }
 
                 }
+                // Option #8 - Search
+                else if (input == 8)
+                {
+                    /*Add a new menu item that asks the user for a search string and returns only items in the items list that contain that 
+                     * search string in their name, description, or list of attendees (for Appointments). HINT: use LINQ to satisfy this requirement most easily.*/
+                    /*                    string searchString;
+                                        do
+                                        {
+                                            Console.WriteLine("Give me an input to search for:");  // Make sure that name is not empty
+                                            searchString = Console.ReadLine();
+
+                                        } while (!searchString.Any());*/
+                    /*                    itemService.ShowComplete = true;
+                    */
+                    Console.WriteLine("What do you want to search for?");
+                    itemService.Query = Console.ReadLine();
+                    var userSelection = string.Empty;
+                    if (itemService.FilteredItems.Count() <= 0)
+                    {
+                        Console.WriteLine("Your list empty.");
+                        continue;
+                    }
+                    while (userSelection != "E")
+                    {
+                        foreach (var item in itemService.GetPage())
+                        {
+                            Console.WriteLine(item);
+                        }
+                        userSelection = Console.ReadLine();
+                        if (userSelection == "N")
+                        {
+                            itemService.NextPage();
+                        }
+                        else if (userSelection == "P")
+                        {
+                            itemService.PreviousPage();
+                        }
+                    }
+/*                    itemService.ShowComplete = false;
+*/                }
+                // Option #9 - Quit
+                else if (input == 9)
+                {
+                    // Q - Quit
+                    System.Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("User did not enter a a valid int!");
+                }
             }
-            else
-            {
-                Console.WriteLine("User did not specify a a valid int!");
-            }
+
         }
 
         // Print the main menu
@@ -327,12 +339,12 @@ namespace ListManagement // Note: actual namespace depends on the project name.
             Console.WriteLine("Task Management Menu");
             Console.WriteLine("1. Create a new task");
             Console.WriteLine("2. Create a new appointment");
-            Console.WriteLine("3. Delete an existing task");
+            Console.WriteLine("3. Delete an existing task or appointment");
             Console.WriteLine("4. Edit an existing task");
             Console.WriteLine("5. Complete a task");
             Console.WriteLine("6. List all outstanding (not complete) tasks");
             Console.WriteLine("7. List all tasks");
-            Console.WriteLine("8. Save");
+            Console.WriteLine("8. Search");
             Console.WriteLine("9. Exit");
             Console.Write("Please choose an option from the menu: ");
         }
