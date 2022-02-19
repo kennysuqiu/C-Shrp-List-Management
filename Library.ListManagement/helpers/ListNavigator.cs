@@ -108,7 +108,6 @@ namespace Library.ListManagement.helpers
             return window;
         }
     }
-
     public class PageFaultException : Exception
     {
         public PageFaultException(string message) : base(message)

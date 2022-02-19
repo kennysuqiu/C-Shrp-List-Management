@@ -17,12 +17,14 @@ namespace Library.ListManagement.services
             = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         static private ItemService instance;
-
+        private string query = string.Empty;
         static private string peristencePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         static private string filePath = Path.Combine(peristencePath, "taskData.json");
 
         public bool ShowComplete { get; set; }
-        public string Query { get; set; }
+        public string Query { get => query.ToUpper(); set => query = value; }
+
+
         public List<Item> Items
         {
             get
@@ -42,7 +44,10 @@ namespace Library.ListManagement.services
                 || (i?.Name?.ToUpper().Contains(Query) ?? false)
                 || (i?.Description?.ToUpper()?.Contains(Query) ?? false)
                 || ((i as Appointment)?.Attendees?.Select(t => t.ToUpper())?.Contains(Query) ?? false));
-                return searchResults;
+                if (searchResults.Any())
+                    return searchResults;
+                else 
+                    return Enumerable.Empty<Item>();
             }
         }
 
@@ -138,6 +143,11 @@ namespace Library.ListManagement.services
             {
                 return Items.Select(i => i.Id).Max() + 1;
             }
+        }
+
+        public Dictionary<object, Item> FirstPage()
+        {
+            return listNav.GoToFirstPage();
         }
     }
 }
