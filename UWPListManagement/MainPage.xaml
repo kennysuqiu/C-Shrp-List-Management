@@ -9,6 +9,38 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+            <Button Grid.Column="1" Content="Load" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+            <TextBox Grid.Column="2"></TextBox>
+            <Button Grid.Column="3" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListBox ItemsSource="{Binding Path=Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ListBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Add ToDo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddToDoClick"></Button>
+            <Button Grid.Column="1" Content="Add Appointment" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddAppointmentClick"></Button>
+            <Button Grid.Column="2" Content="List All Items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+            <Button Grid.Column="3" Content="List Outstanding" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+        </Grid>
 
     </Grid>
 </Page>

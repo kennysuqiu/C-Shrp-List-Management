@@ -13,7 +13,7 @@
       },
       "Library.ListManagement/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
         },

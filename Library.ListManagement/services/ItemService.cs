@@ -104,7 +104,6 @@ namespace Library.ListManagement.services
 
         public void Save()
         {
-
             var listJson = JsonConvert.SerializeObject(Items, serializerSettings);
             if (File.Exists(filePath))
             {

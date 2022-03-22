@@ -1,0 +1,5 @@
+C:\Users\K\Source\Repos\C-Shrp-List-Management\Library.ListManagement\obj\Debug\netcoreapp3.1\Library.ListManagement.csproj.AssemblyReference.cache
+C:\Users\K\Source\Repos\C-Shrp-List-Management\Library.ListManagement\obj\Debug\netcoreapp3.1\Library.ListManagement.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\K\Source\Repos\C-Shrp-List-Management\Library.ListManagement\obj\Debug\netcoreapp3.1\Library.ListManagement.AssemblyInfoInputs.cache
+C:\Users\K\Source\Repos\C-Shrp-List-Management\Library.ListManagement\obj\Debug\netcoreapp3.1\Library.ListManagement.AssemblyInfo.cs
+C:\Users\K\Source\Repos\C-Shrp-List-Management\Library.ListManagement\obj\Debug\netcoreapp3.1\Library.ListManagement.csproj.CoreCompileInputs.cache
