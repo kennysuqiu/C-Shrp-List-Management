@@ -4,14 +4,14 @@
     "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\UWPListManagement\\UWPListManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\Library.ListManagement.Standard.csproj": {
+    "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\Library.ListManagement.Standard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\Library.ListManagement.Standard.csproj",
+        "projectUniqueName": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\Library.ListManagement.Standard.csproj",
         "projectName": "Library.ListManagement.Standard",
-        "projectPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\Library.ListManagement.Standard.csproj",
+        "projectPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\Library.ListManagement.Standard.csproj",
         "packagesPath": "C:\\Users\\K\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\obj\\",
+        "outputPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -99,8 +99,8 @@
         "frameworks": {
           "uap10.0.17763": {
             "projectReferences": {
-              "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\Library.ListManagement.Standard.csproj": {
-                "projectPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\Library.ListManagement.Standard.csproj"
+              "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\Library.ListManagement.Standard.csproj": {
+                "projectPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\Library.ListManagement.Standard.csproj"
               }
             }
           }

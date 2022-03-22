@@ -2,5 +2,5 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/ClassLibrary1/bin/Debug/netstandard2.0
-/ClassLibrary1/obj
+bin
+obj

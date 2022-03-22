@@ -8357,8 +8357,8 @@
     },
     "Library.ListManagement.Standard/1.0.0": {
       "type": "project",
-      "path": "../ClassLibrary1/Library.ListManagement.Standard.csproj",
-      "msbuildProject": "../ClassLibrary1/Library.ListManagement.Standard.csproj"
+      "path": "../Library.ListManagement.Standard/Library.ListManagement.Standard.csproj",
+      "msbuildProject": "../Library.ListManagement.Standard/Library.ListManagement.Standard.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -8401,8 +8401,8 @@
       "frameworks": {
         "uap10.0.17763": {
           "projectReferences": {
-            "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\Library.ListManagement.Standard.csproj": {
-              "projectPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\ClassLibrary1\\Library.ListManagement.Standard.csproj"
+            "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\Library.ListManagement.Standard.csproj": {
+              "projectPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement.Standard\\Library.ListManagement.Standard.csproj"
             }
           }
         }

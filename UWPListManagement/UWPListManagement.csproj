@@ -177,8 +177,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\Library.ListManagement.Standard.csproj">
-      <Project>{fe0e3663-6444-4350-b3c5-1c13e9b22a69}</Project>
+    <ProjectReference Include="..\Library.ListManagement.Standard\Library.ListManagement.Standard.csproj">
+      <Project>{aa4b94d4-85a9-4fad-9e9d-398f9e6e6584}</Project>
       <Name>Library.ListManagement.Standard</Name>
     </ProjectReference>
   </ItemGroup>
