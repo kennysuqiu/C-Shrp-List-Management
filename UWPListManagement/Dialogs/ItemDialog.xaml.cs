@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWPListManagement.Dialogs
 {
-    public sealed partial class ItemDialogo : ContentDialog
+    public sealed partial class ItemDialog : ContentDialog
     {
-        public ItemDialogo()
+        public ItemDialog()
         {
             this.InitializeComponent();
         }

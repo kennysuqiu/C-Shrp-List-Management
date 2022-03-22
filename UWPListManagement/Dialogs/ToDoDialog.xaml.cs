@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Library.ListManagement.services;
+using ListManagement.models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -19,9 +22,12 @@ namespace UWPListManagement.Dialogs
 {
     public sealed partial class ToDoDialog : ContentDialog
     {
+        private ObservableCollection<Item> _toDoCollection;
         public ToDoDialog()
         {
             this.InitializeComponent();
+            _toDoCollection = ItemService.Current.Items;
+            DataContext = new ToDo();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

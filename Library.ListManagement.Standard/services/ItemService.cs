@@ -3,6 +3,7 @@ using ListManagement.models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Library.ListManagement.services
 {
     public class ItemService
     {
-        private List<Item> items;
+        private ObservableCollection<Item> items;
         private ListNavigator<Item> listNav;
         private JsonSerializerSettings serializerSettings
             = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
@@ -26,7 +27,7 @@ namespace Library.ListManagement.services
         public string Query { get => query.ToUpper(); set => query = value; }
 
 
-        public List<Item> Items
+        public ObservableCollection<Item> Items
         {
             get
             {
@@ -66,7 +67,7 @@ namespace Library.ListManagement.services
 
         private ItemService()
         {
-            items = new List<Item>();
+            items = new ObservableCollection<Item>();
 
             if (File.Exists(filePath))
             {
@@ -75,13 +76,13 @@ namespace Library.ListManagement.services
                     var state = File.ReadAllText(filePath);
                     if (state.Length > 0)
                     {
-                        items = JsonConvert.DeserializeObject<List<Item>>(state, serializerSettings) ?? new List<Item>();
+                        items = JsonConvert.DeserializeObject<ObservableCollection<Item>>(state, serializerSettings) ?? new ObservableCollection<Item>();
                     }
                 }
                 catch (Exception e)
                 {
                     File.Delete(filePath);
-                    items = new List<Item>();
+                    items = new ObservableCollection<Item>();
                 }
             }
 

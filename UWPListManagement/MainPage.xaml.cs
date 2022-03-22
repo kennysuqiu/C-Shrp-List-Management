@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWPListManagement
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page 
     {
         public MainPage()
         {
@@ -29,19 +29,13 @@ namespace UWPListManagement
 
         private async void AddToDoClick(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).Add(
-                new ListManagement.models.ToDo { Name = "Test", Description = "Test Description" }
-                );
             var dialog = new ToDoDialog();
             await dialog.ShowAsync();
         }
 
-        private async void AddAppointmentClick(object sender, RoutedEventArgs e)
+        private async void EditToDoClick(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).Add(
-                new ListManagement.models.Appointment { Name = "Test", Description = "Test Description" }
-                );
-            var dialog = new AppointmentDialog();
+            var dialog = new ToDoDialog();
             await dialog.ShowAsync();
         }
 
