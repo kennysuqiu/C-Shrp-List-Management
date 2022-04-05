@@ -9,24 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.ListManagement.services
+namespace ListManagement.services
 {
     public class ItemService
     {
         private ObservableCollection<Item> items;
         private ListNavigator<Item> listNav;
+        private string persistencePath;
         private JsonSerializerSettings serializerSettings
             = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         static private ItemService instance;
-        private string query = string.Empty;
-        static private string peristencePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        static private string filePath = Path.Combine(peristencePath, "taskData.json");
 
         public bool ShowComplete { get; set; }
-        public string Query { get => query.ToUpper(); set => query = value; }
-
-
         public ObservableCollection<Item> Items
         {
             get
@@ -35,6 +30,8 @@ namespace Library.ListManagement.services
             }
         }
 
+        public string Query { get; set; }
+
         public IEnumerable<Item> FilteredItems
         {
             get
@@ -42,14 +39,17 @@ namespace Library.ListManagement.services
                 var incompleteItems = Items.Where(i =>
                 (!ShowComplete && !((i as ToDo)?.IsCompleted ?? true)) //incomplete only
                 || ShowComplete);
+                //show complete (all)
+
                 var searchResults = incompleteItems.Where(i => string.IsNullOrWhiteSpace(Query)
-                || (i?.Name?.ToUpper().Contains(Query) ?? false)
-                || (i?.Description?.ToUpper()?.Contains(Query) ?? false)
-                || ((i as Appointment)?.Attendees?.Select(t => t.ToUpper())?.Contains(Query) ?? false));
-                if (searchResults.Any())
-                    return searchResults;
-                else 
-                    return Enumerable.Empty<Item>();
+                //there is no query
+                || (i?.Name?.ToUpper()?.Contains(Query.ToUpper()) ?? false)
+                //i is any item and its name contains the query
+                || (i?.Description?.ToUpper()?.Contains(Query.ToUpper()) ?? false)
+                //or i is any item and its description contains the query
+                || ((i as Appointment)?.Attendees?.Select(t => t.ToUpper())?.Contains(Query.ToUpper()) ?? false));
+                //or i is an appointment and has the query in the attendees list
+                return searchResults;
             }
         }
 
@@ -69,34 +69,34 @@ namespace Library.ListManagement.services
         {
             items = new ObservableCollection<Item>();
 
-            if (File.Exists(filePath))
+            persistencePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\SaveData.json";
+            if (File.Exists(persistencePath))
             {
                 try
                 {
-                    var state = File.ReadAllText(filePath);
-                    if (state.Length > 0)
+                    var state = File.ReadAllText(persistencePath);
+                    if (state != null)
                     {
                         items = JsonConvert.DeserializeObject<ObservableCollection<Item>>(state, serializerSettings) ?? new ObservableCollection<Item>();
                     }
                 }
                 catch (Exception e)
                 {
-                    File.Delete(filePath);
+                    File.Delete(persistencePath);
                     items = new ObservableCollection<Item>();
                 }
             }
 
-            listNav = new ListNavigator<Item>(FilteredItems, 5);
+            listNav = new ListNavigator<Item>(FilteredItems, 2);
         }
 
         public void Add(Item i)
         {
-            items.Add(i);
             if (i.Id <= 0)
             {
                 i.Id = nextId;
             }
-            
+            items.Add(i);
         }
 
         public void Remove(Item i)
@@ -106,12 +106,13 @@ namespace Library.ListManagement.services
 
         public void Save()
         {
+
             var listJson = JsonConvert.SerializeObject(Items, serializerSettings);
-            if (File.Exists(filePath))
+            if (File.Exists(persistencePath))
             {
-                File.Delete(filePath);
+                File.Delete(persistencePath);
             }
-            File.WriteAllText(filePath, listJson);
+            File.WriteAllText(persistencePath, listJson);
         }
 
         public Dictionary<object, Item> GetPage()
@@ -142,13 +143,12 @@ namespace Library.ListManagement.services
         {
             get
             {
-                return Items.Select(i => i.Id).Max() + 1;
+                if (Items.Any())
+                {
+                    return Items.Select(i => i.Id).Max() + 1;
+                }
+                return 1;
             }
-        }
-
-        public Dictionary<object, Item> FirstPage()
-        {
-            return listNav.GoToFirstPage();
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ListManagement.models;
+using ListManagement.services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Library.ListManagement.services;
-using ListManagement.models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,30 +23,32 @@ namespace UWPListManagement.Dialogs
     public sealed partial class ToDoDialog : ContentDialog
     {
         private ObservableCollection<Item> _toDoCollection;
-        public ToDoDialog()
+        public ToDoDialog(ObservableCollection<Item> list)
         {
             this.InitializeComponent();
-            _toDoCollection = ItemService.Current.Items;
+            _toDoCollection = list;
+
             DataContext = new ToDo();
         }
 
-        public ToDoDialog(Item item)
+        public ToDoDialog(ObservableCollection<Item> list, Item item)
         {
             this.InitializeComponent();
-            _toDoCollection = ItemService.Current.Items;
+            _toDoCollection = list;
             DataContext = item;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             var item = DataContext as ToDo;
-            if (_toDoCollection.Any(i=>i.Id == item.Id))
+            if (_toDoCollection.Any(i => i.Id == item.Id))
             {
                 var itemToUpdate = _toDoCollection.FirstOrDefault(i => i.Id == item.Id);
                 var index = _toDoCollection.IndexOf(itemToUpdate);
                 _toDoCollection.RemoveAt(index);
                 _toDoCollection.Insert(index, item);
-            } else
+            }
+            else
             {
                 ItemService.Current.Add(DataContext as ToDo);
             }
