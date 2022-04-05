@@ -35,9 +35,18 @@ namespace UWPListManagement
 
         private async void EditToDoClick(object sender, RoutedEventArgs e)
         {
-            var dialog = new ToDoDialog();
+            var dialog = new ToDoDialog((DataContext as MainViewModel).SelectedItem);
             await dialog.ShowAsync();
         }
 
+        private void AddAptClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditAptClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

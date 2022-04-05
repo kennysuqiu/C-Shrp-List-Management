@@ -13,26 +13,40 @@
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Name"></TextBlock>
-            <TextBox Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        </Grid>
+        <!--APPOINTMENT CARD-->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"></TextBlock>
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=BoundAppointment.Item.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Description"></TextBlock>
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=BoundAppointment.Item.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Start"></TextBlock>
+                <DatePicker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Date="{Binding Path=BoundAppointment.Item.BoundStart, Mode=TwoWay}"></DatePicker>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="End"></TextBlock>
+                <DatePicker Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Date="{Binding Path=BoundAppointment.Item.BoundEnd, Mode=TwoWay}"></DatePicker>
+                <Grid Grid.Row="4" Grid.ColumnSpan="4" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Text="{Binding Path=BoundAppointment.Item.AttendeesString, Mode=TwoWay}"></TextBox>
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=BoundAppointment.Item.Attendees}"></ListBox>
+                </Grid>
 
-        <Grid Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Description"></TextBlock>
-            <TextBox Grid.Column="1" Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </Grid>
         </Grid>
     </Grid>
 </ContentDialog>

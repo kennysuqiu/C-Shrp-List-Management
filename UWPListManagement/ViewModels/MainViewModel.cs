@@ -31,17 +31,7 @@ namespace UWPListManagement.ViewModels
 
         public Item SelectedItem
         {
-            get 
-            { 
-                return selectedItem; 
-            }
-            set 
-            { 
-                if (value != selectedItem)
-                {
-                    selectedItem = value;
-                }
-            }
+            get; set;
         }
 
         public void Add(Item item)

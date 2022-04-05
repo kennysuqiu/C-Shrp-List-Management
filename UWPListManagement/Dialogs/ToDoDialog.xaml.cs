@@ -30,8 +30,27 @@ namespace UWPListManagement.Dialogs
             DataContext = new ToDo();
         }
 
+        public ToDoDialog(Item item)
+        {
+            this.InitializeComponent();
+            _toDoCollection = ItemService.Current.Items;
+            DataContext = item;
+        }
+
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            var item = DataContext as ToDo;
+            if (_toDoCollection.Any(i=>i.Id == item.Id))
+            {
+                var itemToUpdate = _toDoCollection.FirstOrDefault(i => i.Id == item.Id);
+                var index = _toDoCollection.IndexOf(itemToUpdate);
+                _toDoCollection.RemoveAt(index);
+                _toDoCollection.Insert(index, item);
+            } else
+            {
+                ItemService.Current.Add(DataContext as ToDo);
+            }
+
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
