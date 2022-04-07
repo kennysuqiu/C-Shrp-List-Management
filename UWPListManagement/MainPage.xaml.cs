@@ -19,25 +19,56 @@ namespace UWPListManagement
             DataContext = new MainViewModel();
         }
 
+        private bool isCheckBoxChecked;
+        public bool IsCheckBoxChecked
+        {
+            get
+            {
+                return isCheckBoxChecked;
+            }
+            set
+            {
+                isCheckBoxChecked = value;
+            }
+        }
+
         private async void AddToDoClick(object sender, RoutedEventArgs e)
         {
-            var dialog = new ToDoDialog((DataContext as MainViewModel).Items);
+            var dialog = new ToDoDialog();
             await dialog.ShowAsync();
-        }
+            }
 
         private async void EditToDoClick(object sender, RoutedEventArgs e)
         {
-            var dialog = new ToDoDialog((DataContext as MainViewModel).Items, (DataContext as MainViewModel).SelectedItem);
+            var dialog = new ToDoDialog((DataContext as MainViewModel).SelectedItem);
             await dialog.ShowAsync();
         }
 
-        private void AddAptClick(object sender, RoutedEventArgs e)
+        private async void AddAptClick(object sender, RoutedEventArgs e)
         {
-
+            var dialog = new AppointmentDialog();
+            await dialog.ShowAsync();
         }
 
-        private void EditAptClick(object sender, RoutedEventArgs e)
+        private async void EditAptClick(object sender, RoutedEventArgs e)
         {
+            var dialog = new AppointmentDialog((DataContext as MainViewModel).SelectedItem);
+            await dialog.ShowAsync();
+        }
+
+        private void DeleteClick(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainViewModel).RemoveItem();
+        }
+
+        private void SaveClick(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainViewModel).SaveState();
+        }
+
+        private void SortClick(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainViewModel).PrioritySort();
 
         }
     }

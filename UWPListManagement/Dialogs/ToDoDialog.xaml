@@ -28,6 +28,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -39,7 +40,9 @@
                 <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
                 <TextBlock Text="Description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></TextBlock>
                 <TextBox Text="{Binding Path=Description, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
-                <CheckBox Content="Completed" IsChecked="{Binding Path=IsCompleted, Mode=TwoWay}" Grid.Row="2" Grid.Column="0"></CheckBox>
+                <TextBlock Text="Deadline" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></TextBlock>
+                <DatePicker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" SelectedDate="{Binding Path=BoundDeadline, Mode=TwoWay}"></DatePicker>
+                <CheckBox Content="Completed" IsChecked="{Binding Path=IsCompleted, Mode=TwoWay}" Grid.Row="3" Grid.Column="0"></CheckBox>
 
             </Grid>
         </Grid>

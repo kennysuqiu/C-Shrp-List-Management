@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ListManagement.models
 {
@@ -7,12 +8,49 @@ namespace ListManagement.models
 	{
 		public DateTime Start { get; set; }
 		public DateTime End { get; set; }
-		public List<string> Attendees { get; set; }
+
+		private DateTimeOffset _boundStart;
+		public DateTimeOffset BoundStart
+        {
+			get { return _boundStart; }
+			set
+			{
+				_boundStart = value;
+				Start = _boundStart.DateTime;
+
+			}
+        }
+
+		private DateTimeOffset _boundEnd;
+		public DateTimeOffset BoundEnd
+		{
+			get { return _boundEnd; }
+			set
+			{
+				_boundEnd = value;
+				End = _boundEnd.DateTime;
+
+			}
+		}
+		public List<string> Attendees 
+		{ 
+			get
+            {
+				if (!string.IsNullOrWhiteSpace(AttendeesString))
+                {
+					return AttendeesString.Split(new char[] { ',' }).ToList();
+                }
+				return new List<string>();
+            }
+		}
+
+		public string AttendeesString { get; set; }
 
 		public Appointment()
         {
-			Attendees = new List<string>();	// Initialize the list to a blank list, prevents it from being null
-
+			//Attendees = new List<string>(); // Initialize the list to a blank list, prevents it from being null
+			BoundStart = DateTime.Today;
+			BoundEnd = DateTime.Today.AddDays(1);
         }
 
 

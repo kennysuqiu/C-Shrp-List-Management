@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Appointment"
-    PrimaryButtonText="Button1"
-    SecondaryButtonText="Button2"
+    PrimaryButtonText="Ok"
+    SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
@@ -30,21 +30,17 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"></TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=BoundAppointment.Item.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Description"></TextBlock>
-                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=BoundAppointment.Item.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Start"></TextBlock>
-                <DatePicker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Date="{Binding Path=BoundAppointment.Item.BoundStart, Mode=TwoWay}"></DatePicker>
+                <DatePicker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" SelectedDate="{Binding Path=BoundStart, Mode=TwoWay}"></DatePicker>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="End"></TextBlock>
-                <DatePicker Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Date="{Binding Path=BoundAppointment.Item.BoundEnd, Mode=TwoWay}"></DatePicker>
-                <Grid Grid.Row="4" Grid.ColumnSpan="4" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Text="{Binding Path=BoundAppointment.Item.AttendeesString, Mode=TwoWay}"></TextBox>
-                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=BoundAppointment.Item.Attendees}"></ListBox>
-                </Grid>
+                <DatePicker Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" SelectedDate="{Binding Path=BoundEnd, Mode=TwoWay}"></DatePicker>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Attendees"></TextBlock>
+                <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=AttendeesString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                
 
             </Grid>
         </Grid>

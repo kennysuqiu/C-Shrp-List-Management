@@ -21,13 +21,34 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+            <Button Grid.Column="0" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SaveClick"></Button>
             <Button Grid.Column="1" Content="Load" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
             <TextBox Grid.Column="2"></TextBox>
             <Button Grid.Column="3" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
         </Grid>
         <Grid Grid.Row="1">
-            <ListBox ItemsSource="{Binding Path=Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ListBox>
+            <CheckBox IsChecked="{Binding Path=IsCompleted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0"></CheckBox>
+            <ListBox ItemsSource="{Binding Path=Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox IsChecked="{Binding Path=IsCompleted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0"></CheckBox>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Name}"></TextBlock>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Description}"></TextBlock>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=AttendeesString}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -42,8 +63,8 @@
             <Button Grid.Column="1" Content="Edit ToDo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="EditToDoClick"></Button>
             <Button Grid.Column="2" Content="Add Appointment" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddAptClick"></Button>
             <Button Grid.Column="3" Content="Edit Appointment" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="EditAptClick"></Button>
-            <Button Grid.Column="4" Content="List All Items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
-            <Button Grid.Column="5" Content="List Outstanding" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+            <Button Grid.Column="4" Content="Delete" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="DeleteClick"></Button>
+            <Button Grid.Column="5" Content="Filter " HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SortClick"></Button>
         </Grid>
 
     </Grid>

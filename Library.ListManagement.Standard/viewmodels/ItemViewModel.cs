@@ -1,9 +1,4 @@
 ﻿using ListManagement.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ListManagement.ViewModels
 {
@@ -79,6 +74,7 @@ namespace ListManagement.ViewModels
         public ToDo BoundToDo { get; set; }
 
         public Appointment BoundAppointment { get; set; }
+        public object Priority { get; set; }
 
         public ItemViewModel(Item item)
         {
@@ -88,11 +84,15 @@ namespace ListManagement.ViewModels
                 IsCompleted = false;
                 BoundToDo = null;
             }
-            else
+            else if (item is ToDo)
             {
                 BoundToDo = item as ToDo;
                 BoundAppointment = null;
                 IsCompleted = (item as ToDo).IsCompleted;
+            }
+            else
+            {
+                
             }
         }
     }
