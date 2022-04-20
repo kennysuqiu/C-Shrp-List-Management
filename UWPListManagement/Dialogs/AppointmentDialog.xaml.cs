@@ -12,6 +12,7 @@ namespace UWPListManagement.Dialogs
     public sealed partial class AppointmentDialog : ContentDialog {
         private ObservableCollection<ItemViewModel> _toDoCollection;
 
+        //Test
 
         public AppointmentDialog()
         {
