@@ -1,6 +1,6 @@
 ﻿using Library.ListManagement.helpers;
-using ListManagement.models;
-using ListManagement.ViewModels;
+using ListManagement.Standard.models;
+using ListManagement.Standard.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
-namespace ListManagement.services
+namespace ListManagement.Standard.services
 {
     public class ItemService
     {

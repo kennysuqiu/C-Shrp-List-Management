@@ -1,6 +1,6 @@
-﻿using ListManagement.models;
-using ListManagement.services;
-using ListManagement.ViewModels;
+﻿using ListManagement.Standard.models;
+using ListManagement.Standard.services;
+using ListManagement.Standard.ViewModels;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Xaml.Controls;

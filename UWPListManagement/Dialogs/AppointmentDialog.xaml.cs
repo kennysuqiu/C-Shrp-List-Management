@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using ListManagement.models;
-using ListManagement.services;
-using ListManagement.ViewModels;
+using ListManagement.Standard.models;
+using ListManagement.Standard.services;
+using ListManagement.Standard.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238

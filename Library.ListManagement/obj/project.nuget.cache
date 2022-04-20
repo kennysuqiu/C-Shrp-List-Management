@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VPaRoFccCKO7weAGakc0vqLXJ8aEyYRbFSJNT8dZ8yfejHAfDC81lFVXcZwZ9SsaAE6z4bRCxDixQoNuPkx2gg==",
+  "dgSpecHash": "VaSO/1Zmo5chkiF9mG3Su9ctQu5ny9VyMMmlCK9ubnXu0d17NtDOk3MCuG9rZJkeDCfKvcTHAXGLAeHGoi9P2Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement\\Library.ListManagement.csproj",
+  "projectFilePath": "C:\\Users\\K\\Downloads\\C-Shrp-List-Management-assign_3 (1)\\C-Shrp-List-Management-assign_3\\Library.ListManagement\\Library.ListManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\K\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],

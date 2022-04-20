@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ListManagement.models
+namespace ListManagement.Standard.models
 {
 	public class ToDo: Item	//ToDo is a child of Item or Item is the Parent of ToDo
 	{

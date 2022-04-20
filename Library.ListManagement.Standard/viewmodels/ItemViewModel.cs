@@ -1,6 +1,6 @@
-﻿using ListManagement.models;
+﻿using ListManagement.Standard.models;
 
-namespace ListManagement.ViewModels
+namespace ListManagement.Standard.ViewModels
 {
     public class ItemViewModel
     {
@@ -21,6 +21,17 @@ namespace ListManagement.ViewModels
                     : BoundAppointment?.Description ?? string.Empty;
             }
         }
+
+        public string AttendeesString
+        {
+            get
+            {
+                return IsAppointment
+                    ? BoundAppointment?.AttendeesString ?? string.Empty
+                    : BoundAppointment?.AttendeesString ?? string.Empty;
+            }
+        }
+
 
         public Item BoundItem
         {
@@ -62,6 +73,15 @@ namespace ListManagement.ViewModels
                 }
             }
         }
+
+        public bool IsAppointment
+        {
+            get
+            {
+                return BoundAppointment != null;
+            }
+        }
+
 
         public bool IsTodo
         {

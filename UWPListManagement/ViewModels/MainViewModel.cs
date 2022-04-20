@@ -1,6 +1,6 @@
-﻿using ListManagement.models;
-using ListManagement.services;
-using ListManagement.ViewModels;
+﻿using ListManagement.Standard.models;
+using ListManagement.Standard.services;
+using ListManagement.Standard.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;

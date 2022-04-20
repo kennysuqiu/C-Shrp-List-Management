@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Library.ListManagement.Standard.utilities;
 using Newtonsoft.Json;
 
-namespace ListManagement.models
+namespace ListManagement.Standard.models
 {
     public class Item
     {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement\\Library.ListManagement.csproj": {}
+    "C:\\Users\\K\\Downloads\\C-Shrp-List-Management-assign_3 (1)\\C-Shrp-List-Management-assign_3\\Library.ListManagement\\Library.ListManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement\\Library.ListManagement.csproj": {
+    "C:\\Users\\K\\Downloads\\C-Shrp-List-Management-assign_3 (1)\\C-Shrp-List-Management-assign_3\\Library.ListManagement\\Library.ListManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement\\Library.ListManagement.csproj",
+        "projectUniqueName": "C:\\Users\\K\\Downloads\\C-Shrp-List-Management-assign_3 (1)\\C-Shrp-List-Management-assign_3\\Library.ListManagement\\Library.ListManagement.csproj",
         "projectName": "Library.ListManagement",
-        "projectPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement\\Library.ListManagement.csproj",
+        "projectPath": "C:\\Users\\K\\Downloads\\C-Shrp-List-Management-assign_3 (1)\\C-Shrp-List-Management-assign_3\\Library.ListManagement\\Library.ListManagement.csproj",
         "packagesPath": "C:\\Users\\K\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\K\\Source\\Repos\\C-Shrp-List-Management\\Library.ListManagement\\obj\\",
+        "outputPath": "C:\\Users\\K\\Downloads\\C-Shrp-List-Management-assign_3 (1)\\C-Shrp-List-Management-assign_3\\Library.ListManagement\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
