@@ -1,4 +1,6 @@
-﻿using API.ListManagement.Database;
+﻿using API.ListManagement.database;
+using API.ListManagement.EC;
+using Library.ListManagement.Standard.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.ListManagement.Controllers
@@ -8,14 +10,29 @@ namespace API.ListManagement.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly ILogger<ToDoController> _logger;
+
         public AppointmentController(ILogger<ToDoController> logger)
         {
             _logger = logger;
         }
+
         [HttpGet()]
-        public double Get()
+        public IEnumerable<AppointmentDTO> Get()
         {
-            return FakeDatabase.doubles[0];
+            return new AppointmentEC().Get();
+        }
+
+        [HttpPost("AddOrUpdate")]
+        public AppointmentDTO AddOrUpdate([FromBody] AppointmentDTO apt)
+        {
+
+            return new AppointmentEC().AddOrUpdate(apt);
+        }
+
+        [HttpPost("Delete")]
+        public AppointmentDTO Delete([FromBody] DeleteItemDTO deleteItemDTO)
+        {
+            return new AppointmentEC().Delete(deleteItemDTO.IdToDelete);
         }
     }
 }

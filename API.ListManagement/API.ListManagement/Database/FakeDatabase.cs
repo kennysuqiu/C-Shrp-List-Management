@@ -1,17 +1,19 @@
 ﻿using ListManagement.models;
 
-namespace API.ListManagement.Database
+namespace API.ListManagement.database
 {
-    public static class FakeDatabase
+    static public class FakeDatabase
     {
-        public static List<int> ints = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-        public static List<double> doubles = new List<double> { 3.14, 2.80, 9.23 };
-
-        public static List<Item> Items = new List<Item>
+        public static List<Item> Appointments = new List<Item>
         {
-            new Appointment{Name = "Appointment 1", Description="Appointment 1 Description"},
-            new ToDo{Name = "ToDo 1", Description="ToDo 1 Description"}
+            new Appointment{Name = "Appointment 1", Description="Appointment 1 Desc", Start=DateTime.Today, End=DateTime.Today, Id = 1, Attendees={ "Kenny", "Fernando", "Su"} },
+
+        };
+
+        public static List<Item> ToDos = new List<Item>
+        {
+            new ToDo{Name = "ToDo 1", Description="ToDo 1 Desc", IsCompleted=false, Id = 2}
         };
     }
 }

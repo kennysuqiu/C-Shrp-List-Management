@@ -1,15 +1,17 @@
-using API.ListManagement.Database;
+using API.ListManagement.database;
+using API.ListManagement.EC;
+using Library.ListManagement.Standard.DTO;
 using ListManagement.models;
+using ListManagement.services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.ListManagement.Controllers
 {
+    
     [ApiController]
     [Route("[controller]")]
     public class ToDoController : ControllerBase
     {
-        private List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
         private readonly ILogger<ToDoController> _logger;
 
         public ToDoController(ILogger<ToDoController> logger)
@@ -18,27 +20,23 @@ namespace API.ListManagement.Controllers
         }
 
         [HttpGet()]
-        public IEnumerable<Item> Get()
+        public IEnumerable<ToDoDTO> Get()
         {
-            return FakeDatabase.Items;
+            return new ToDoEC().Get();
         }
 
-        [HttpGet("GetAnInt/{index}")]
-        public ActionResult GetAnInt(int index)
+
+        [HttpPost("AddOrUpdate")]
+        public ToDoDTO AddOrUpdate([FromBody] ToDoDTO todo)
         {
-            if (index > FakeDatabase.ints.Count)
-            {
-                return BadRequest();
-            } 
-            return Ok(FakeDatabase.ints[index]);
+
+            return new ToDoEC().AddOrUpdate(todo);
         }
 
-        [HttpGet("AddNext")]
-        public int AddNext()
+        [HttpPost("Delete")]
+        public ToDoDTO Delete([FromBody] DeleteItemDTO deleteItemDTO)
         {
-            var max = FakeDatabase.ints.Max() + 1;
-            FakeDatabase.ints.Add(max);
-            return max;
+            return new ToDoEC().Delete(deleteItemDTO.IdToDelete);
         }
     }
 }
