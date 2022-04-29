@@ -21,7 +21,6 @@ namespace Library.ListManagement.Standard.DTO
 
         public ToDoDTO()
         {
-            Deadline = DateTimeOffset.Now;
         }
     }
 }

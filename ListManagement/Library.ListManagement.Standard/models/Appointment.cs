@@ -59,8 +59,8 @@ namespace ListManagement.models
 
         public Appointment(AppointmentDTO dto)
         {
-            Start = dto.Start;
-            End = dto.End;
+            BoundStart = dto.Start;
+            BoundEnd = dto.End;
 
             Name = dto.Name;
             Description = dto.Description;

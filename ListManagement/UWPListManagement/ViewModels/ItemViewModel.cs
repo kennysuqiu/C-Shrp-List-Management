@@ -36,6 +36,22 @@ namespace ListManagement.ViewModels
             }
         }
 
+        public DateTimeOffset Start
+        {
+            get
+            {
+                return BoundAppointment?.Start ?? DateTimeOffset.Now;
+            }
+        }
+
+        public DateTimeOffset End
+        {
+            get
+            {
+                return BoundAppointment?.End ?? DateTimeOffset.Now;
+            }
+        }
+
         public string Description
         {
             get

@@ -1,4 +1,5 @@
-﻿using API.ListManagement.database;
+﻿using Api.ToDoApplication.Persistence;
+using API.ListManagement.database;
 using Library.ListManagement.Standard.DTO;
 using ListManagement.models;
 using ListManagement.services;
@@ -19,8 +20,8 @@ namespace API.ListManagement.EC
             {
                 //CREATE
                 apt.Id = ItemService.Current.NextId;
-                FakeDatabase.Appointments.Add(new Appointment(apt));
-                //Filebase.Current.AddOrUpdate(new ToDo(todo));
+                //FakeDatabase.Appointments.Add(new Appointment(apt));
+                Filebase.Current.AddOrUpdate(new Appointment(apt));
             }
             else
             {
@@ -28,17 +29,17 @@ namespace API.ListManagement.EC
             }
             {
                 //UPDATE
-                var itemToUpdate = FakeDatabase.Appointments.FirstOrDefault(i => i.Id == apt.Id);
+                var itemToUpdate = Filebase.Current.Appointments.FirstOrDefault(i => i.Id == apt.Id);
                 if (itemToUpdate != null)
                 {
-                    var index = FakeDatabase.Appointments.IndexOf(itemToUpdate);
-                    FakeDatabase.Appointments.Remove(itemToUpdate);
-                    FakeDatabase.Appointments.Insert(index, new Appointment(apt));
+                    var index = Filebase.Current.Appointments.IndexOf(itemToUpdate);
+                    Filebase.Current.Appointments.Remove(itemToUpdate);
+                    Filebase.Current.Appointments.Insert(index, new Appointment(apt));
                 }
                 else
                 {
                     //CREATE -- Fall-Back
-                    FakeDatabase.Appointments.Add(new Appointment(apt));
+                    Filebase.Current.Appointments.Add(new Appointment(apt));
                 }
             }
 
